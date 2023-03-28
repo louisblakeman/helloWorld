@@ -1,0 +1,80 @@
+{% extends "base.html" %} {# allows this template to override the parent template (base.html) #}
+
+{%  block page_title %}Contact{% endblock %}
+
+{%  block page_head %}Contact{% endblock %}
+
+{% block page_content %}
+
+      {% if form_submitted %} {# returns the following if the form has been submitted #}
+
+          <div class="row mb-3">
+              <h2>Thank you for submitting the contact form! </h2>
+          </div>
+          <div class="row mb-3">
+            <p>First Name:</p>
+          </div>
+          <div class="row mb-3">
+            <p>{{ request.form.get('first_name') }}</p>
+          </div>
+          <div class="row mb-3">
+            <p>Last Name:</p>
+          </div>
+          <div class="row mb-3">
+            <p>{{ request.form.get('last_name') }}</p>
+          </div>
+          <div class="row mb-3">
+            <p>Email Address:</p>
+          </div>
+          <div class="row mb-3">
+            <p>{{ request.form.get('email') }}</p>
+          </div>
+          <div class="row mb-3">
+            <p>Favorite Color:</p>
+          </div>
+          <div class="row mb-3">
+            <p>{{ request.form.get('favorite_color') }}</p>
+          </div>
+
+      {% else %} {# displays the form if it has not yet been submitted #}
+
+      <form class="row mb-3" action="{{ url_for('contact') }}" method="post">
+          <div class="row mb-3">
+            <label for="first_name" class="col-sm-2 col-form-label">First Name</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="first_name" name="first_name">
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="last_name" class="col-sm-2 col-form-label">Last Name</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="last_name" name="last_name">
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="email" class="col-sm-2 col-form-label">Email Address</label>
+            <div class="col-sm-10">
+              <input type="email" class="form-control" id="email" name="email">
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="favorite_color" class="col-sm-2 col-form-label" >Favorite Color</label>
+            <select class="form-select" id="favorite_color" name="favorite_color">
+              <option selected>Select</option>
+              <option value="Red">Red</option>
+              <option value="Orange">Orange</option>
+              <option value="Yellow">Yellow</option>
+              <option value="Green">Green</option>
+              <option value="Blue">Blue</option>
+              <option value="Indigo">Indigo</option>
+              <option value="Violet">Violet</option>
+            </select>
+          </div>
+          <div class="row mb-3">
+              <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+    </form>
+
+    {% endif %}
+
+{% endblock %}
